@@ -1,0 +1,21 @@
+- Display 5 map markers on map in neighbourhood
+- App should display locations by default when loading
+- Implement a list view of the locations
+- Provide a filter option that uses an input field to filter both the list view and the map markers displayed by default on load. The list view and the markers should update accordingly in real-time. Providing a search function through a third-party API is not enough to meet specifications.
+- Add functionality using third-party APIs to provide information when a map marker or list view entry is clicked (ex. Yelp reviews, Wikipedia, Flickr images, etc).
+- Add functionality to animate a map marker when either the list item associated with it or the map marker itself is selected.
+- Add functionality to open an infoWindow with the information described in step 7 when either a location is selected from the list view or its map marker is selected directly.
+- The app's interface should be intuitive to use. For example, the input text area to filter locations should be easy to locate.
+- Error Handling: In case of error (e.g. in a situation where a third party api does not return the expected result) we expect your webpage to do one of the following: A message is displayed notifying the user that the data can't be loaded, OR There are no negative repercussions to the UI. Note: Please note that we expect students to handle errors if the browser has trouble initially reaching the 3rd-party site as well. 
+--- Handle errors if google map could not load
+------ Use host file to block sites for tests.
+
+- Make app work on iPhone
+
+- Use IIFE function wrapper thing
+
+===============================================================
+DONE:
+---------------------------------------------------------------
+- Download/use knockout
+- Use google maps

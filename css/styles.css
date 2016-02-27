@@ -6,10 +6,11 @@
 
 
 
-// TODO: delete
+/* TODO: delete */
 .column {
     flex: 1;
 }
+
 .cat_list_name {
     background-color: orange;
     cursor: pointer;
