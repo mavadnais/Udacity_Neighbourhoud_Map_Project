@@ -1,6 +1,5 @@
-- Display 5 map markers on map in neighbourhood
-- App should display locations by default when loading
 - Implement a list view of the locations
+- Implement a title
 - Provide a filter option that uses an input field to filter both the list view and the map markers displayed by default on load. The list view and the markers should update accordingly in real-time. Providing a search function through a third-party API is not enough to meet specifications.
 - Add functionality using third-party APIs to provide information when a map marker or list view entry is clicked (ex. Yelp reviews, Wikipedia, Flickr images, etc).
 - Add functionality to animate a map marker when either the list item associated with it or the map marker itself is selected.
@@ -11,11 +10,14 @@
 ------ Use host file to block sites for tests.
 
 - Make app work on iPhone
+--- Implement a hamburger menu
 
 - Use IIFE function wrapper thing
 
 ===============================================================
 DONE:
 ---------------------------------------------------------------
+- Display 5 map markers on map in neighbourhood
+- App should display locations by default when loading
 - Download/use knockout
 - Use google maps
