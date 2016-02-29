@@ -1,0 +1,5 @@
+Notes Ajax
+Asynchronous Javascript And Xml request
+Data: XML, JSON, HTML
+OAuth for service authentication
+cors jsonp

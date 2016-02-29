@@ -1,0 +1,33 @@
+MVO: Model View Octopus
+MVC: Model View Controller
+MVVM: Model View ViewModel
+MVP: Model View Presenter
+
+Model and View shouldn't communicate directly. That's what the octopus is for.
+
+Library vs Framework
+
+Fundamental organizational concepts
+Model, collections, ViewModel, Controller, View, Router
+
+Knockout JS
+
+console.dir(foo
+var myNum = ko.observable(5);
+
+functions are objects
+
+immediately-invoked function expression (or IIFE)
+(function() {
+  // the code here is executed once in its own scope
+})();
+
+(function(a, b) {
+  // a == 'hello'
+  // b == 'world'
+})('hello', 'world');
+
+jquery execute on document ready
+$(function(){
+   //code in here
+});

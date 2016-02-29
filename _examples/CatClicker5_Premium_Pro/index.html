@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Clicker 5: Premium Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="cat_container">
+        <div class="column" id="cat_list"></div>
+        <div class="column" id="cat_display">
+            <img id="cat_image" src=""/>
+            <div id="cat_name"></div>
+            <div id="cat_score"></div>
+            <div class="admin_container">
+                <div>
+                    <button id="admin_button" type="button">Admin</button>
+                </div>
+                <div id="admin_view">
+                    <form>
+                        <div class="form_line">
+                            <label>Name:</label>
+                            <input id="admin_cat_name" name="admin_cat_name"/>
+                        </div class="form_line">
+                        <div>
+                            <label>Image URL:</label>
+                            <input id="admin_cat_image" name="admin_cat_image"/>
+                        </div>
+                        <div class="form_line">
+                            <label>Score:</label>
+                            <input id="admin_cat_score" name="admin_cat_score"/>
+                        </div>
+                        <div class="form_line">
+                            <button id="admin_cancel_button" type="button">Cancel</button>
+                            <button id="admin_save_button" type="button">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/libs/jquery-2.1.4.js"></script>
+    <script src="js/script.js"></script>   
+</body>
+</html>
