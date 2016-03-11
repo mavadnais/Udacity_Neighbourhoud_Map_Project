@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Neighbourhood Map Project</title>
+    <title>MAV's Neighbourhood Map Project</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body>   
+    <div id="top_bar" class="light_text flex_container dark_background">
+        <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" onclick="toggleMenuContainer();"/>
+        <div id="main_title" class="column">MAV's Neighbourhood Map</div>
+    </div>
+    <div id="menu_container" class="flex_container">
+        <div id="main_menu" class="light_text column dark_background">
+                <div class="menu_item pointer_cursor">Item 1</div>
+                <div class="menu_item pointer_cursor">Item 2</div>
+                <div class="menu_item pointer_cursor">Item 3</div>
+                <div class="menu_item pointer_cursor">Item 4</div>
+                <div class="menu_item pointer_cursor">Item 5</div>
+        </div>
+    </div>
     <div id="map"></div>
     
     <script src="js/libs/jquery/jquery.min.js"></script>

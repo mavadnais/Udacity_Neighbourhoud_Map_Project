@@ -32,3 +32,9 @@ $(function(){
     
 });
 
+function toggleMenuContainer()
+{
+    console.log("in toggleMenucontainer");
+    $('#menu_container').toggle()
+}
+
