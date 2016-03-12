@@ -12,13 +12,13 @@
         <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" onclick="toggleMenuContainer();"/>
         <div id="main_title" class="column">MAV's Neighbourhood Map</div>
     </div>
-    <div id="menu_container" class="flex_container">
+    <div id="menu_container">
         <div id="main_menu" class="light_text column dark_background">
-                <div class="menu_item pointer_cursor">Item 1</div>
-                <div class="menu_item pointer_cursor">Item 2</div>
-                <div class="menu_item pointer_cursor">Item 3</div>
-                <div class="menu_item pointer_cursor">Item 4</div>
-                <div class="menu_item pointer_cursor">Item 5</div>
+            <div id="menu_title">Markers:</div>
+            <div id="filter_container" class="flex_container">
+                <div id="filter_title" class="flex_item">Filter:&nbsp;</div>
+                <input id="filter_text_field" class="flex_item" type="text" onchange="updateFilter()"/>
+            </div>
         </div>
     </div>
     <div id="map"></div>

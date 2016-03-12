@@ -24,13 +24,36 @@ body {
 
 .menu_item {
     font-weight: bold;
-    font-size: 15pt;
+    font-size: 13pt;
     padding: 10px;
 }
 
 .menu_item:hover {
     color: black;
-    background-color: orange;
+    background-color: darkorange;
+}
+
+/* TODO: remove
+#filter_text_field {
+    max-height: 20px;
+    vertical-align: text-bottom;
+}
+*/
+#filter_container {
+    padding: 0px;
+    font-size: 13pt;
+    padding: 7px;
+}
+
+#filter_title {
+    font-weight: bold;
+}
+
+#menu_title {
+    color: darkorange;
+    font-weight: bold;
+    font-size: 15pt;
+    padding: 10px;
 }
 
 #map {
@@ -60,7 +83,7 @@ body {
 }
 
 #main_menu {
-    width: 200px;
-    min-width: 200px;
-    max-width: 200px;
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
 }

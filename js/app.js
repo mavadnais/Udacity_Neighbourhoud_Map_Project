@@ -28,13 +28,18 @@ var g_markersArray = [
 ];
 
 $(function(){
-
-    
+    for (var i = 0; i < g_markersArray.length; i++) {
+        $('#main_menu').append(
+            '<div class="menu_item pointer_cursor"> - ' + g_markersArray[i].title + '</div>'  
+        );
+    }
 });
 
-function toggleMenuContainer()
-{
-    console.log("in toggleMenucontainer");
+function toggleMenuContainer() {
     $('#menu_container').toggle()
+}
+
+function updateFilter() {
+    console.log('in updateFilter: ' + $('#filter_text_field').val());
 }
 
