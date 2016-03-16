@@ -28,6 +28,12 @@ var g_markersArray = [
 ];
 
 $(function(){
+    var mapWidth = $(window).width() * 0.85;
+    var mapHeight = $(window).height() * 0.9;
+    console.log("width: " + mapWidth + ", height: " + mapHeight);
+    $('#map_container').width(mapWidth + 'px');
+    $('#map_container').height(mapHeight + 'px');
+    
     for (var i = 0; i < g_markersArray.length; i++) {
         $('#main_menu').append(
             '<div class="menu_item pointer_cursor"> - ' + g_markersArray[i].title + '</div>'  
@@ -36,7 +42,7 @@ $(function(){
 });
 
 function toggleMenuContainer() {
-    $('#menu_container').toggle()
+    //$('#menu_container').toggle()
 }
 
 function updateFilter() {

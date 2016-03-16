@@ -7,21 +7,25 @@
     <title>MAV's Neighbourhood Map Project</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>   
-    <div id="top_bar" class="light_text flex_container dark_background">
+<body class="dark_background">   
+    <div id="top_bar" class="light_text flex_container">
         <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" onclick="toggleMenuContainer();"/>
         <div id="main_title" class="column">MAV's Neighbourhood Map</div>
     </div>
-    <div id="menu_container">
-        <div id="main_menu" class="light_text column dark_background">
-            <div id="menu_title">Markers:</div>
-            <div id="filter_container" class="flex_container">
-                <div id="filter_title" class="flex_item">Filter:&nbsp;</div>
-                <input id="filter_text_field" class="flex_item" type="text" onchange="updateFilter()"/>
+    <div class="flex_container">
+        <div id="menu_container" class="flex_item">
+            <div id="main_menu" class="light_text column">
+                <div id="menu_title">Markers:</div>
+                <div id="filter_container" class="flex_container">
+                    <div id="filter_title" class="flex_item">Filter:&nbsp;</div>
+                    <input id="filter_text_field" class="flex_item" type="text" onchange="updateFilter()"/>
+                </div>
             </div>
         </div>
+        <div id="map_container"  class="flex_item">
+            <div id="map"></div>
+        </div>
     </div>
-    <div id="map"></div>
     
     <script src="js/libs/jquery/jquery.min.js"></script>
     <script src="js/libs/knockout/knockout-3.4.0.js"></script>
