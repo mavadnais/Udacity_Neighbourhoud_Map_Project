@@ -54,6 +54,10 @@ body {
     color: white;
 }
 
+.info_title {
+    font-weight: bold;
+}
+
 #message_display {
     font-weight: bold;
     margin: 10px;

@@ -3,7 +3,6 @@ var g_map;
 var g_geocoder;
 
 function initMap() {
- 
     // Create a map object and specify the DOM element for display.
     g_map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16
@@ -31,6 +30,19 @@ function addMarkerToMap(p_marker) {
                 map: g_map,
                 title: p_marker.title
             });
+            
+            // Generate info window html
+            p_marker.infoContent = g_infoTitleHTMLBase.replace('%info_title%', p_marker.title);
+            p_marker.infoContent += '<br>';
+            p_marker.infoContent += g_infoAddressHTMLBase.replace('%info_address%', p_marker.address);
+            p_marker.infoContent += '<br>';
+            p_marker.infoContent += g_infoDescriptionHTMLBase.replace('%info_description%', p_marker.description);
+            p_marker.infoContent += '<br>';
+            if (p_marker.website) {
+                p_marker.infoContent += g_infoWebsiteHTMLBase.replace(new RegExp('%info_website%', 'g'), p_marker.website);
+                p_marker.infoContent += '<br>';
+            }
+            p_marker.infoContent += g_infoImageHTMLBase.replace('%info_image_location%', p_marker.address);
             
             // Create info window
             p_marker.infoWindow = new google.maps.InfoWindow({
@@ -64,5 +76,5 @@ function openInfoWindowByMarker(p_marker) {
     
     // Open info window and center on marker
     p_marker.infoWindow.open(g_map, p_marker.mapMarker);
-    g_map.setCenter(p_marker.geoLocation);
+    //g_map.setCenter(p_marker.geoLocation);
 }
