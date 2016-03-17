@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MAV's Neighbourhood Map Project</title>
+    <title>MAV's Neighbourhood Map</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="dark_background">   
     <div id="top_bar" class="light_text flex_container">
         <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" onclick="toggleMenuContainer();"/>
-        <div id="main_title" class="column">MAV's Neighbourhood Map</div>
+        <div id="main_title" class="column"><span class="bright_color">MAV's</span> Neighbourhood <span class="bright_color">Map</span></div>  
     </div>
+    <div id="message_display"></div>
     <div class="flex_container">
         <div id="menu_container" class="flex_item">
             <div id="main_menu" class="light_text column">
-                <div id="menu_title">Markers:</div>
+                <div id="menu_title" class="bright_color">Markers:</div>
                 <div id="filter_container" class="flex_container">
                     <div id="filter_title" class="flex_item">Filter:&nbsp;</div>
                     <input id="filter_text_field" class="flex_item" type="text" onchange="updateFilter()"/>
                 </div>
             </div>
-        </div>
-        <div id="map_container"  class="flex_item">
-            <div id="map"></div>
-        </div>
+        </div>  
+        <div id="map"  class="flex_item"></div>
     </div>
     
     <script src="js/libs/jquery/jquery.min.js"></script>
