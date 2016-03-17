@@ -71,6 +71,7 @@ function updateFilter() {
 }
 
 function displayMessage(p_message, p_messageType) {
+    // Display the message
     var messageDisplay = $('#message_display');
     messageDisplay.show()
     messageDisplay.text(p_message);

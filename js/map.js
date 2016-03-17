@@ -58,9 +58,8 @@ function openInfoWindowByIndex(p_markerIndex) {
 function openInfoWindowByMarker(p_marker) {
      // Close all other info windows
     for (var i = 0;  i < g_markersArray.length; i++) {
-        if (g_markersArray[i] != p_marker) {
+        if (g_markersArray[i] != p_marker)
             g_markersArray[i].infoWindow.close();    
-        }
     }
     
     // Open info window and center on marker
