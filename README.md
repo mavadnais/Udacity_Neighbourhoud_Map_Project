@@ -1,7 +1,15 @@
-# Udacity_Neighbourhoud_Map_Project
+# Udacity Neighbourhoud Map Project 
+Project 5 in Front-End Web Development NanoDegree.
 
 ## Run
 - Open up index.html in Chrome.
+
+## Functionality
+- Click on a marker in the menu or on the map to open up its info window.
+- Typing in the filter field will select all applicable markers. 
+- If only one marker is selected it will open up its info window.
+- Clicking on a marker will clear the filter and select the clicked marker.
+- Clicking the clear button will also clear the filter. 
 
 ## Test
 - Use g_testFailures in app.js to test failure messages/handling. E.g. g_testFailures.testGeocodeFailure = true to test the handling if a geocode lookup fails.
