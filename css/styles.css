@@ -58,8 +58,11 @@ body {
     font-weight: bold;
 }
 
-#message_display {
+.info_yelp {
     font-weight: bold;
+}
+
+#message_display {
     margin: 10px;
 }
 
