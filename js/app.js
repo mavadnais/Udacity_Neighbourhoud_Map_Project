@@ -1,4 +1,4 @@
-
+// Initial array of marker objects
 var g_markersArray = [
     {
         index: 0,
@@ -67,6 +67,7 @@ var g_markersArray = [
     }      
 ];
 
+// Base HTML for the different parts of the info window
 var g_infoTitleHTMLBase = '<div class="info_title">%info_title%</div>';
 var g_infoAddressHTMLBase = '<div class="info_address">%info_address%</div>';
 var g_infoDescriptionHTMLBase = '<div class="info_description">%info_description%</div>';
@@ -79,6 +80,31 @@ var g_testFailures = {
 };
 
 var g_selectedMarkers = [];
+
+// Object for knockout markers
+var Marker = function(p_data) {
+    this.index = ko.observable(p_data.index);
+    this.title = ko.observable(p_data.title);
+    this.selected = ko.observable(false);
+    this.data = p_data;      
+};
+
+// Knockout view model
+var ViewModel = function() {
+    var self = this;
+    
+    this.markerList = ko.observableArray([]);
+    
+    g_markersArray.forEach(function(p_markerItem) {
+        self.markerList.push(new Marker(p_markerItem));
+    });
+    
+    this.selectCurrentMarker = function(p_selectedMarker) {
+        openInfoWindowByIndex(p_selectedMarker.index());    
+    };    
+};
+
+ko.applyBindings(new ViewModel());
 
 function displayMessage(p_message, p_messageType) {
     // Display the message
@@ -136,8 +162,6 @@ var YelpRetriever = function() {
 };
 
 YelpRetriever.prototype.getYelpInfo = function(p_marker) {
-    console.log('Get yelp review for: ' + p_marker.title);
-    
     var yelpURLBase = 'http://api.yelp.com/v2/business/'
     var message = {
 	    'action' : yelpURLBase + p_marker.yelpBusinessID,
@@ -150,8 +174,6 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 			
     var parameterMap = OAuth.getParameterMap(message.parameters);
 	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
-	console.log('parameterMap:');
-    console.log(parameterMap);
     
     // Make the Ajax Call
 	$.ajax({
@@ -160,27 +182,26 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 		'cache' : true,
 		'dataType' : 'jsonp',
 		'jsonpCallback' : 'cb',
-		'success' : function(data, textStats, XMLHttpRequest) {
-            console.log('In yelp ajax success');
-		    console.log(data);
-            p_marker.yelpInfo = data;
+		'success' : function(p_data, p_textStats, p_XMLHttpRequest) {
+            p_marker.yelpInfo = p_data;
             
+            // Add the Yelp review to the info window
             var yelpReview = '<br>Yelp Review: ' + p_marker.yelpInfo.rating + '<br>';
             yelpReview += '<img src="' + p_marker.yelpInfo.rating_img_url + '"/>';
             p_marker.infoContent += g_infoYelpHTMLBase.replace('%info_yelp%', yelpReview);
             p_marker.infoWindow.content = p_marker.infoContent;
 		},
-        'error' : function(XMLHttpRequest, textStatus, errorThrown) {
+        'error' : function(p_XMLHttpRequest, p_textStatus, p_errorThrown) {
             displayMessage('Could not get yelp info for: ' + p_marker.title + 
-                ', textStatus: ' + textStatus +
-                ', errorThrown: ' + errorThrown, 'negative');
+                ', textStatus: ' + p_textStatus +
+                ', errorThrown: ' + p_errorThrown, 'negative');
         }
 	});
 };
 
 // TODO: do something with this if necessary
 function cb() {
-    console.log('In cb');
+    //console.log('In cb');
 }
 
 var g_yelpRetriever = new YelpRetriever();
@@ -192,13 +213,6 @@ $(function(){
     var mapHeight = $(window).height() * 0.9;
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
-    
-    // Populate the menu of markers 
-    for (var i = 0; i < g_markersArray.length; i++) {
-        $('#main_menu').append(
-            '<div id="marker_menu_item_' + i + '" class="menu_item pointer_cursor" onclick="openInfoWindowByIndex(' + i + ')"> - ' + g_markersArray[i].title + '</div>'  
-        );
-    }
 });
 
 function toggleMenuContainer() {
@@ -238,13 +252,13 @@ function clearFilter() {
         closeAllInfoWindows();
     }
     
+    // Clear the selected marker array
     g_selectedMarkers = [];
     
+    // Remove selected_marker class from all markers since none are selected
     for (var i = 0; i < g_markersArray.length; i++) {
         $('#marker_menu_item_' + i).removeClass('selected_marker');   
     }
-    
-    
 }
 
 function generateInfoContent(p_marker) {

@@ -6,6 +6,7 @@ Project 5 in Front-End Web Development NanoDegree.
 
 ### Functionality
 - Click on a marker in the menu or on the map to open up its info window.
+- The info window contains a title, description, website link (when available), streetview image, Yelp review (if loaded).
 - Typing in the filter field will select all applicable markers. 
 - If only one marker is selected it will open up its info window.
 - Clicking on a marker will clear the filter and select the clicked marker.

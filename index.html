@@ -22,6 +22,9 @@
                     <input id="filter_text_field" class="flex_item" type="text" onkeyup="updateFilter()"/>
                     <div id="filter_clear" class="flex_item pointer_cursor" onclick="clearFilter()">Clear</div>
                 </div>
+                <div data-bind="foreach: markerList">
+                    <div class="menu_item pointer_cursor" data-bind="attr: {'id': 'marker_menu_item_' + $data.index}, text: $data.title, click: $parent.selectCurrentMarker"></div>
+                </div>
             </div>
         </div>  
         <div id="map"  class="flex_item"></div>
@@ -31,8 +34,8 @@
     <script src="js/libs/knockout/knockout-3.4.0.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 		<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-    <script src="js/map.js"></script>   
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
-    <script src="js/app.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>   
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>  
 </body>
 </html>
