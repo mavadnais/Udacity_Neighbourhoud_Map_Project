@@ -19,7 +19,8 @@
                 <div id="menu_title" class="bright_color">Markers:</div>
                 <div id="filter_container" class="flex_container">
                     <div id="filter_title" class="flex_item">Filter:&nbsp;</div>
-                    <input id="filter_text_field" class="flex_item" type="text" onchange="updateFilter()"/>
+                    <input id="filter_text_field" class="flex_item" type="text" onkeyup="updateFilter()"/>
+                    <div id="filter_clear" class="flex_item pointer_cursor" onclick="clearFilter()">Clear</div>
                 </div>
             </div>
         </div>  

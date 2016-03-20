@@ -62,6 +62,23 @@ body {
     font-weight: bold;
 }
 
+.selected_marker {
+    background-color: green;
+    color: white;
+}
+
+#filter_clear {
+    background-color: darkorange;
+    color: black;    
+    font-weight: bold;
+    padding: 5px;
+}
+
+#filter_clear:active {
+    color: white;
+    background-color: darkred;
+}
+
 #message_display {
     margin: 10px;
 }

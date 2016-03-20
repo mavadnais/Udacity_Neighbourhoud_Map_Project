@@ -59,14 +59,21 @@ function openInfoWindowByIndex(p_markerIndex) {
 function openInfoWindowByMarker(p_marker) {
      // Close all other info windows
     for (var i = 0;  i < g_markersArray.length; i++) {
-        if (g_markersArray[i] != p_marker)
-            g_markersArray[i].infoWindow.close();    
+        if (g_markersArray[i] != p_marker) {
+            closeInfoWindowByMarker(g_markersArray[i]);
+        }   
     }
     
     // Open info window
     p_marker.infoWindow.open(g_map, p_marker.mapMarker);
 }
 
-function addYelpReview() {
-    
+function closeInfoWindowByMarker(p_marker) {
+    p_marker.infoWindow.close();
+}
+
+function closeAllInfoWindows() {
+    for (var i = 0;  i < g_markersArray.length; i++) {
+        closeInfoWindowByMarker(g_markersArray[i]);  
+    }    
 }

@@ -78,6 +78,8 @@ var g_testFailures = {
     testGeocodeFailure: false  
 };
 
+var g_selectedMarkers = [];
+
 function displayMessage(p_message, p_messageType) {
     // Display the message
     var messageDisplay = $('#message_display');
@@ -194,7 +196,7 @@ $(function(){
     // Populate the menu of markers 
     for (var i = 0; i < g_markersArray.length; i++) {
         $('#main_menu').append(
-            '<div class="menu_item pointer_cursor" onclick="openInfoWindowByIndex(' + i + ')"> - ' + g_markersArray[i].title + '</div>'  
+            '<div id="marker_menu_item_' + i + '" class="menu_item pointer_cursor" onclick="openInfoWindowByIndex(' + i + ')"> - ' + g_markersArray[i].title + '</div>'  
         );
     }
 });
@@ -204,7 +206,45 @@ function toggleMenuContainer() {
 }
 
 function updateFilter() {
-    console.log('in updateFilter: ' + $('#filter_text_field').val());
+    var filterValue = $('#filter_text_field').val();
+    console.log('in updateFilter: ' + filterValue);
+    
+    g_selectedMarkers = [];
+    
+    // Iterate through all the markers and see if the filter is a substring of the title{
+    for (var i = 0; i < g_markersArray.length; i++) {
+        var lowerCaseTitle = g_markersArray[i].title.toLowerCase();
+            
+        if (filterValue && lowerCaseTitle.indexOf(filterValue) > -1) {
+            g_selectedMarkers.push(g_markersArray[i]);
+            $('#marker_menu_item_' + i).addClass('selected_marker');    
+        }
+        else {
+            $('#marker_menu_item_' + i).removeClass('selected_marker'); 
+        }    
+    }
+    
+    // If there is only one selecter marker, opent its info window    
+    if (g_selectedMarkers.length == 1) {
+        openInfoWindowByMarker(g_selectedMarkers[0]);
+    }
+}
+
+function clearFilter() {
+    $('#filter_text_field').val('');
+    
+    // If there is only one selected marker by the filter close all the info windows (should only be one, but just to be safe)
+    if (g_selectedMarkers.length == 1) {
+        closeAllInfoWindows();
+    }
+    
+    g_selectedMarkers = [];
+    
+    for (var i = 0; i < g_markersArray.length; i++) {
+        $('#marker_menu_item_' + i).removeClass('selected_marker');   
+    }
+    
+    
 }
 
 function generateInfoContent(p_marker) {
