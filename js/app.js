@@ -81,11 +81,10 @@ var g_testFailures = {
 
 var g_selectedMarkers = [];
 
-// Object for knockout markers
+// Class for knockout markers
 var Marker = function(p_data) {
     this.index = ko.observable(p_data.index);
     this.title = ko.observable(p_data.title);
-    this.selected = ko.observable(false);
     this.data = p_data;      
 };
 
