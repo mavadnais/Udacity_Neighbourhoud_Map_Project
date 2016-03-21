@@ -80,6 +80,7 @@ var g_testFailures = {
 };
 
 var g_selectedMarkers = [];
+var g_displayMessage = '';
 
 // Class for knockout markers
 var Marker = function(p_data) {
@@ -109,7 +110,13 @@ function displayMessage(p_message, p_messageType) {
     // Display the message
     var messageDisplay = $('#message_display');
     messageDisplay.show()
-    messageDisplay.text(p_message);
+    if (g_displayMessage) {
+        g_displayMessage += '<br>' + p_message;
+    }
+    else {
+        g_displayMessage = p_message;
+    }
+    messageDisplay.html(g_displayMessage);
     
     // Change text color depending on type of message
     switch (p_messageType) {
@@ -126,7 +133,8 @@ function displayMessage(p_message, p_messageType) {
     // In 10 seconds hide the message
     window.setTimeout(function() {
         messageDisplay.hide()
-        messageDisplay.text('');
+        g_displayMessage = '';
+        messageDisplay.html(g_displayMessage);
         messageDisplay.removeClass('negative_message');
         messageDisplay.removeClass('positive_message');
         messageDisplay.removeClass('neutral_message');
@@ -181,6 +189,7 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 		'cache' : true,
 		'dataType' : 'jsonp',
 		'jsonpCallback' : 'cb',
+        'timeout' : 2000,
 		'success' : function(p_data, p_textStats, p_XMLHttpRequest) {
             p_marker.yelpInfo = p_data;
             

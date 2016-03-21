@@ -19,7 +19,6 @@ Project 5 in Front-End Web Development NanoDegree.
 ### Limitations/Bugs
 - Only tested on Chrome.
 - Only tested on Desktop.
-- Only lastest error is displayed. 
 - Usually not all yelp reviews are returned (average only 3 out of 5).
 - Not sure what callback cb should be used for, if I take out references to it in the ajax call, the ajax call fails. 
 
