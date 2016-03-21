@@ -23,7 +23,7 @@
                     <div id="filter_clear" class="flex_item pointer_cursor" onclick="clearFilter()">Clear</div>
                 </div>
                 <div data-bind="foreach: markerList">
-                    <div class="menu_item pointer_cursor" data-bind="attr: {'id': 'marker_menu_item_' + $data.index}, text: $data.title, click: $parent.selectCurrentMarker"></div>
+                    <div class="menu_item pointer_cursor" data-bind="attr: {'id': 'marker_menu_item_' + $data.index()}, text: $data.title, click: $parent.selectCurrentMarker"></div>
                 </div>
             </div>
         </div>  

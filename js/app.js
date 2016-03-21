@@ -229,15 +229,15 @@ function toggleMenuContainer() {
 
 function updateFilter() {
     var filterValue = $('#filter_text_field').val();
-    console.log('in updateFilter: ' + filterValue);
     
     g_selectedMarkers = [];
     
     // Iterate through all the markers and see if the filter is a substring of the title{
     for (var i = 0; i < g_markersArray.length; i++) {
         var lowerCaseTitle = g_markersArray[i].title.toLowerCase();
+        var lowerCaseFilterValue = filterValue.toLowerCase();
             
-        if (filterValue && lowerCaseTitle.indexOf(filterValue) > -1) {
+        if (lowerCaseFilterValue && lowerCaseTitle.indexOf(lowerCaseFilterValue) > -1) {
             g_selectedMarkers.push(g_markersArray[i]);
             $('#marker_menu_item_' + i).addClass('selected_marker');    
         }
