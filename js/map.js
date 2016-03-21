@@ -1,6 +1,7 @@
 
 var g_map;
 var g_geocoder;
+var g_mapInitialized = false;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -15,7 +16,16 @@ function initMap() {
     for (var i = 0;  i < g_markersArray.length; i++) {
         addMarkerToMap(g_markersArray[i]);
     }
+    
+    g_mapInitialized = true;
 }
+
+// In 3 seconds check if map has been initialized
+window.setTimeout(function() {
+    if (! g_mapInitialized) {
+        displayMessage('Could not initialize Google Map.', 'negative');
+    }
+}, 3000);
 
 function addMarkerToMap(p_marker) {
     g_geocoder.geocode( { 'address': p_marker.address}, function(p_results, p_status) {
