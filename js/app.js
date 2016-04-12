@@ -197,7 +197,7 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
             var yelpReview = '<br>Yelp Review: ' + p_marker.yelpInfo.rating + '<br>';
             yelpReview += '<img src="' + p_marker.yelpInfo.rating_img_url + '"/>';
             p_marker.infoContent += g_infoYelpHTMLBase.replace('%info_yelp%', yelpReview);
-            p_marker.infoWindow.content = p_marker.infoContent;
+            p_marker.infoWindow.setContent(p_marker.infoContent);
 		},
         'error' : function(p_XMLHttpRequest, p_textStatus, p_errorThrown) {
             displayMessage('Could not get yelp info for: ' + p_marker.title + 

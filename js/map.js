@@ -54,8 +54,6 @@ function addMarkerToMap(p_marker) {
             });
         } 
         else {
-            // TODO: better error handling in message box under title
-            //alert('Geocode was not successful for the following reason: ' + p_status);
             displayMessage('ERROR: Geocode was not successful for the following reason: ' + p_status, 'negative');
         }
     });
