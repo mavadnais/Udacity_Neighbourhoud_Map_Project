@@ -1,3 +1,5 @@
+'use strict';
+
 // Initial array of marker objects
 var g_markersArray = [
     {
@@ -72,8 +74,8 @@ var g_infoTitleHTMLBase = '<div class="info_title">%info_title%</div>';
 var g_infoAddressHTMLBase = '<div class="info_address">%info_address%</div>';
 var g_infoDescriptionHTMLBase = '<div class="info_description">%info_description%</div>';
 var g_infoWebsiteHTMLBase = '<div class="info_website"><a href="%info_website%">%info_website%</a></div>';
-var g_infoImageHTMLBase = '<div class="info_image"><img src="http://maps.googleapis.com/maps/api/streetview?size=150x100&location=%info_image_location%"/></div>'
-var g_infoYelpHTMLBase = '<div class="info_yelp">%info_yelp%</div>'
+var g_infoImageHTMLBase = '<div class="info_image"><img src="http://maps.googleapis.com/maps/api/streetview?size=150x100&location=%info_image_location%"/></div>';
+var g_infoYelpHTMLBase = '<div class="info_yelp">%info_yelp%</div>';
 
 var g_testFailures = {
     testGeocodeFailure: false  
@@ -100,7 +102,8 @@ var ViewModel = function() {
     });
     
     this.selectCurrentMarker = function(p_selectedMarker) {
-        openInfoWindowByIndex(p_selectedMarker.index());    
+        openInfoWindowByIndex(p_selectedMarker.index());
+        selectMarkerByIndex(p_selectedMarker.index());
     };    
 };
 
@@ -109,7 +112,7 @@ ko.applyBindings(new ViewModel());
 function displayMessage(p_message, p_messageType) {
     // Display the message
     var messageDisplay = $('#message_display');
-    messageDisplay.show()
+    messageDisplay.show();
     if (g_displayMessage) {
         g_displayMessage += '<br>' + p_message;
     }
@@ -132,7 +135,7 @@ function displayMessage(p_message, p_messageType) {
     
     // In 10 seconds hide the message
     window.setTimeout(function() {
-        messageDisplay.hide()
+        messageDisplay.hide();
         g_displayMessage = '';
         messageDisplay.html(g_displayMessage);
         messageDisplay.removeClass('negative_message');
@@ -169,7 +172,7 @@ var YelpRetriever = function() {
 };
 
 YelpRetriever.prototype.getYelpInfo = function(p_marker) {
-    var yelpURLBase = 'http://api.yelp.com/v2/business/'
+    var yelpURLBase = 'http://api.yelp.com/v2/business/';
     var message = {
 	    'action' : yelpURLBase + p_marker.yelpBusinessID,
 		'method' : 'GET',
@@ -180,7 +183,7 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 	OAuth.SignatureMethod.sign(message, this.accessor);
 			
     var parameterMap = OAuth.getParameterMap(message.parameters);
-	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
+	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
     
     // Make the Ajax Call
 	$.ajax({
@@ -224,7 +227,7 @@ $(function(){
 });
 
 function toggleMenuContainer() {
-    $('#menu_container').toggle()
+    $('#menu_container').toggle();
 }
 
 function updateFilter() {
@@ -246,7 +249,7 @@ function updateFilter() {
         }    
     }
     
-    // If there is only one selecter marker, opent its info window    
+    // If there is only one selecter marker, open its info window    
     if (g_selectedMarkers.length == 1) {
         openInfoWindowByMarker(g_selectedMarkers[0]);
     }
@@ -255,10 +258,9 @@ function updateFilter() {
 function clearFilter() {
     $('#filter_text_field').val('');
     
-    // If there is only one selected marker by the filter close all the info windows (should only be one, but just to be safe)
-    if (g_selectedMarkers.length == 1) {
-        closeAllInfoWindows();
-    }
+    // 
+    closeAllInfoWindows();   
+    deselectAllMarkers();
     
     // Clear the selected marker array
     g_selectedMarkers = [];
