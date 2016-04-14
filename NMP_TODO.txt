@@ -10,8 +10,6 @@ TODO:
 
 - Use timeout to handle yelp jsonp errors on the yelp side. (see code review app.js).
 
-- Fix Yelp API not returning all 5 reviews (see code review app.js).
-
 - CSS: change ids to classes
 
 - Google maps implement error handling (see code review index.html).
@@ -23,6 +21,7 @@ TODO:
 ===============================================================
 DONE:
 ---------------------------------------------------------------
+- Fix Yelp API not returning all 5 reviews (see code review app.js).
 - Markers should be filtered as well
 - Markers should animate when clicking on them or in list view
 - Fix filter not opening up info window properly

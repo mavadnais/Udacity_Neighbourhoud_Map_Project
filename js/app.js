@@ -66,7 +66,7 @@ var g_markersArray = [
         mapMarker: null,
         geoLocation: null,
         infoWindow: null
-    }      
+    }     
 ];
 
 // Base HTML for the different parts of the info window
@@ -192,7 +192,6 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 		'data' : parameterMap,
 		'cache' : true,
 		'dataType' : 'jsonp',
-		'jsonpCallback' : 'cb',
         'timeout' : 2000,
 		'success' : function(p_data, p_textStats, p_XMLHttpRequest) {
             p_marker.yelpInfo = p_data;
@@ -210,11 +209,6 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
         }
 	});
 };
-
-// TODO: do something with this if necessary
-function cb() {
-    //console.log('In cb');
-}
 
 var g_yelpRetriever = new YelpRetriever();
 
@@ -299,4 +293,3 @@ function generateInfoContent(p_marker) {
     
     g_yelpRetriever.getYelpInfo(p_marker);
 }
-
