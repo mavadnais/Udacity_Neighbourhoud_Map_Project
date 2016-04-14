@@ -103,7 +103,8 @@ var ViewModel = function() {
     
     this.selectCurrentMarker = function(p_selectedMarker) {
         openInfoWindowByIndex(p_selectedMarker.index());
-        selectMarkerByIndex(p_selectedMarker.index());
+        //TODO REMOVE: selectMarkerByIndex(p_selectedMarker.index());
+        animateMarkerByIndex(p_selectedMarker.index());
     };    
 };
 
@@ -252,15 +253,16 @@ function updateFilter() {
     // If there is only one selecter marker, open its info window    
     if (g_selectedMarkers.length == 1) {
         openInfoWindowByMarker(g_selectedMarkers[0]);
+        animateMarkerByMarker(g_selectedMarkers[0]);
     }
 }
 
 function clearFilter() {
     $('#filter_text_field').val('');
     
-    // 
+    // Close all info windows
     closeAllInfoWindows();   
-    deselectAllMarkers();
+    // TODO REMOVE: deselectAllMarkers();
     
     // Clear the selected marker array
     g_selectedMarkers = [];

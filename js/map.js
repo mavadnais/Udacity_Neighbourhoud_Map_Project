@@ -53,7 +53,8 @@ function addMarkerToMap(p_marker) {
             // Add listener so info window opens when marker is clicked
             p_marker.mapMarker.addListener('click', function() {
                 openInfoWindowByMarker(p_marker);
-                toggleAnimationByMarker(p_marker);
+                // TODO REMOVE: toggleAnimationByMarker(p_marker);
+                animateMarkerByMarker(p_marker);
             });
         } 
         else {
@@ -89,6 +90,22 @@ function closeAllInfoWindows() {
     }    
 }
 
+function animateMarkerByIndex(p_markerIndex) {
+    var marker = g_markersArray[p_markerIndex];
+    animateMarkerByMarker(marker);
+}
+
+function animateMarkerByMarker(p_marker) {
+    if (p_marker.mapMarker.getAnimation() == null) {
+        p_marker.mapMarker.setAnimation(google.maps.Animation.BOUNCE);
+        
+        window.setTimeout(function() {
+            p_marker.mapMarker.setAnimation(null);
+        }, 700);
+    }
+}
+
+/* TODO REMOVE
 function selectMarkerByIndex(p_markerIndex) {
     var marker = g_markersArray[p_markerIndex];
     
@@ -115,3 +132,4 @@ function toggleAnimationByMarker(p_marker) {
         p_marker.mapMarker.setAnimation(google.maps.Animation.BOUNCE);
     }
 }
+*/

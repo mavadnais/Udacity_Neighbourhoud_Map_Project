@@ -5,7 +5,6 @@ TODO:
 --- Make Hamburger menu work
 --- Make infowindows fit screen
 
-- Markers should animate when clicking on them or in list view
 - Markers should be filtered as well
 
 - Use Knockout to handle list, filter, and any other information on the page that is subject to changing state.
@@ -26,6 +25,7 @@ TODO:
 ===============================================================
 DONE:
 ---------------------------------------------------------------
+- Markers should animate when clicking on them or in list view
 - Fix filter not opening up info window properly
 - Fix filter selection with knockout
 - Error Handling: In case of error (e.g. in a situation where a third party api does not return the expected result) we expect your webpage to do one of the following: A message is displayed notifying the user that the data can't be loaded, OR There are no negative repercussions to the UI. Note: Please note that we expect students to handle errors if the browser has trouble initially reaching the 3rd-party site as well. 
