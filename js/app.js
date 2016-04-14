@@ -243,17 +243,24 @@ function updateFilter() {
             
         if (lowerCaseFilterValue && lowerCaseTitle.indexOf(lowerCaseFilterValue) > -1) {
             g_selectedMarkers.push(g_markersArray[i]);
-            $('#marker_menu_item_' + i).addClass('selected_marker');    
+            $('#marker_menu_item_' + i).addClass('selected_marker');
+            g_markersArray[i].mapMarker.setVisible(true);    
         }
         else {
-            $('#marker_menu_item_' + i).removeClass('selected_marker'); 
+            $('#marker_menu_item_' + i).removeClass('selected_marker');
+            g_markersArray[i].mapMarker.setVisible(false);  
         }    
     }
     
-    // If there is only one selecter marker, open its info window    
+    // If there is only one selected marker, open its info window    
     if (g_selectedMarkers.length == 1) {
         openInfoWindowByMarker(g_selectedMarkers[0]);
         animateMarkerByMarker(g_selectedMarkers[0]);
+    }
+    
+    // If there is nothing in the filter, make sure they are all visible   
+    if (! filterValue) {
+        setAllMapMarkersVisible(true);
     }
 }
 
@@ -271,6 +278,9 @@ function clearFilter() {
     for (var i = 0; i < g_markersArray.length; i++) {
         $('#marker_menu_item_' + i).removeClass('selected_marker');   
     }
+    
+    // Set all map markers visible
+    setAllMapMarkersVisible(true);
 }
 
 function generateInfoContent(p_marker) {

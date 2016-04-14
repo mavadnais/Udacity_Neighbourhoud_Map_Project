@@ -5,8 +5,6 @@ TODO:
 --- Make Hamburger menu work
 --- Make infowindows fit screen
 
-- Markers should be filtered as well
-
 - Use Knockout to handle list, filter, and any other information on the page that is subject to changing state.
 --- See code review example app.js
 
@@ -25,6 +23,7 @@ TODO:
 ===============================================================
 DONE:
 ---------------------------------------------------------------
+- Markers should be filtered as well
 - Markers should animate when clicking on them or in list view
 - Fix filter not opening up info window properly
 - Fix filter selection with knockout

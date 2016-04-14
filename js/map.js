@@ -105,6 +105,12 @@ function animateMarkerByMarker(p_marker) {
     }
 }
 
+function setAllMapMarkersVisible(p_isVisible) {
+    for (var i = 0;  i < g_markersArray.length; i++) {
+        g_markersArray[i].mapMarker.setVisible(p_isVisible);  
+    } 
+}
+
 /* TODO REMOVE
 function selectMarkerByIndex(p_markerIndex) {
     var marker = g_markersArray[p_markerIndex];
