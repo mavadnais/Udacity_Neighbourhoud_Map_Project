@@ -192,7 +192,7 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 		'data' : parameterMap,
 		'cache' : true,
 		'dataType' : 'jsonp',
-        'timeout' : 2000,
+        'timeout' : 3000,
 		'success' : function(p_data, p_textStats, p_XMLHttpRequest) {
             p_marker.yelpInfo = p_data;
             
@@ -215,8 +215,23 @@ var g_yelpRetriever = new YelpRetriever();
 $(function(){
     // Set map container width and height relative to the window width and height
     // Couldn't figure out how to do it with css percentages.
-    var mapWidth = $(window).width() * 0.85;
-    var mapHeight = $(window).height() * 0.9;
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+    var mapWidth;
+    var mapHeight;
+
+    if (windowWidth >= 700)
+    {
+        mapWidth = windowWidth * 0.85;
+        mapHeight = windowHeight * 0.9;
+        
+    }
+    else {
+        mapWidth = windowWidth;
+        mapHeight = windowHeight * 0.87;
+        
+        toggleMenuContainer();
+    }
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
 });

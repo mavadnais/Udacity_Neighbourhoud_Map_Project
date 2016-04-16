@@ -10,9 +10,9 @@ TODO:
 
 - Use timeout to handle yelp jsonp errors on the yelp side. (see code review app.js).
 
-- CSS: change ids to classes
-
 - Google maps implement error handling (see code review index.html).
+
+- CSS: change ids to classes, maybe, probably not
 
 - Fix all TODOs or remove them
 

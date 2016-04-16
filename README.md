@@ -16,11 +16,9 @@ Project 5 in Front-End Web Development NanoDegree.
 - Used host file to block: api.yelp.com and maps.googleapis.com .
 - Also used g_testFailures.testGeocodeFailure = true to test geocode failure.
 
-### Limitations/Bugs
+### Limitations
 - Only tested on Chrome.
-- Only tested on Desktop.
-- Usually not all yelp reviews are returned (average only 3 out of 5).
-- Not sure what callback cb should be used for, if I take out references to it in the ajax call, the ajax call fails. 
+- Only tested on mobile emulator with Google Nexus 5 portrait and landscape.
 
 ### References
 - Code for Yelp business reviews largely taken from: https://github.com/levbrie/mighty_marks/blob/master/yelp-business-sample.html, although it was reworked to be an object that could be re-used. 
