@@ -83,6 +83,7 @@ var g_testFailures = {
 
 var g_selectedMarkers = [];
 var g_displayMessage = '';
+var g_isMobile;
 
 // Class for knockout markers
 var Marker = function(p_data) {
@@ -103,8 +104,10 @@ var ViewModel = function() {
     
     this.selectCurrentMarker = function(p_selectedMarker) {
         openInfoWindowByIndex(p_selectedMarker.index());
-        //TODO REMOVE: selectMarkerByIndex(p_selectedMarker.index());
         animateMarkerByIndex(p_selectedMarker.index());
+        if (g_isMobile) {
+            hideMenuContainer();
+        }
     };    
 };
 
@@ -222,15 +225,17 @@ $(function(){
 
     if (windowWidth >= 700)
     {
+        g_isMobile = false;
         mapWidth = windowWidth * 0.85;
         mapHeight = windowHeight * 0.9;
         
     }
     else {
+        g_isMobile = true;
         mapWidth = windowWidth;
         mapHeight = windowHeight * 0.87;
         
-        toggleMenuContainer();
+        hideMenuContainer();
     }
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
@@ -238,6 +243,14 @@ $(function(){
 
 function toggleMenuContainer() {
     $('#menu_container').toggle();
+}
+
+function hideMenuContainer() {
+    $('#menu_container').hide();
+}
+
+function showMenuContainer() {
+    $('#menu_container').show();
 }
 
 function updateFilter() {

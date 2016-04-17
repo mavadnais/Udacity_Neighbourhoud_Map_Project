@@ -15,6 +15,10 @@
     font-weight: bold;
 }
 
+.menu_item {
+    font-weight: bold;
+}
+
 @media (max-width: 699px) {
     #menu_title {
         font-size: 11pt;
@@ -24,6 +28,16 @@
     #top_bar {
         font-size: 12pt;
         padding: 0px;
+    }
+
+    .menu_item {
+        font-size: 11pt;
+        padding: 5px;
+    }
+
+    #filter_container {
+        font-size: 11pt;
+        padding: 5px;
     }
 }
 
@@ -40,6 +54,16 @@
     #top_bar {
         font-size: 25pt;
         padding: 15px;
+    }
+
+    .menu_item {
+        font-size: 13pt;
+        padding: 10px;
+    }
+
+    #filter_container {
+        font-size: 13pt;
+        padding: 7px;
     }
 }
 
@@ -65,12 +89,6 @@ body {
 
 .pointer_cursor {
     cursor: pointer;
-}
-
-.menu_item {
-    font-weight: bold;
-    font-size: 13pt;
-    padding: 10px;
 }
 
 .menu_item:hover {
@@ -126,11 +144,6 @@ body {
 
 #message_display {
     margin: 10px;
-}
-
-#filter_container {
-    font-size: 13pt;
-    padding: 7px;
 }
 
 #filter_title {
