@@ -25,13 +25,15 @@ function initMap() {
 
 function initMapError() {
     g_displayedMapInitError = true;
-    displayMessage('Could not initialize Google Map.', 'negative');  
+    // TODO REMOVE displayMessage('Could not initialize Google Map.', 'negative');  
+    koViewModel.displayLogMessage('Could not initialize Google Map.');
 }
 
 // In 3 seconds check if map has been initialized
 window.setTimeout(function() {
     if (! g_mapInitialized && ! g_displayedMapInitError) {
-        displayMessage('Could not initialize Google Map.', 'negative');
+        //TODO REMOVE displayMessage('Could not initialize Google Map.', 'negative');
+        koViewModel.displayLogMessage('Could not initialize Google Map.');
     }
 }, 3000);
 
@@ -64,7 +66,10 @@ function addMarkerToMap(p_marker) {
             });
         } 
         else {
+            /* TODO REMOVE
             displayMessage('ERROR: Geocode was not successful for the following reason: ' + p_status, 'negative');
+            */
+            koViewModel.displayLogMessage('ERROR: Geocode was not successful for the following reason: ' + p_status);
         }
     });
 }

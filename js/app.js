@@ -83,11 +83,11 @@ var g_infoImageHTMLBase = '<div class="info_image"><img src="http://maps.googlea
 var g_infoYelpHTMLBase = '<div class="info_yelp">%info_yelp%</div>';
 
 var g_testFailures = {
-    testGeocodeFailure: false  
+    testGeocodeFailure: true  
 };
 
 var g_selectedMarkers = [];
-var g_displayMessage = '';
+// TODO REMOVE var g_displayMessage = '';
 var g_isMobile;
 
 // Class for knockout markers
@@ -95,6 +95,12 @@ var Marker = function(p_data) {
     this.index = ko.observable(p_data.index);
     this.title = ko.observable(p_data.title);
     this.data = p_data;      
+};
+
+// Class for knockout log message
+var LogMessage = function() {
+    this.message = ko.observable('');
+    this.showMessage = ko.observable(false);  
 };
 
 // Knockout view model
@@ -113,12 +119,28 @@ var ViewModel = function() {
         if (g_isMobile) {
             hideMenuContainer();
         }
-    };    
+    };   
+    
+    this.logMessage = new LogMessage(); 
+    
+    this.displayLogMessage = function(p_message) {
+        self.logMessage.showMessage(true);
+        self.logMessage.message(self.logMessage.message() + '<br>' + p_message);
+        
+        window.setTimeout(function() {
+            self.logMessage.message('');
+            self.logMessage.showMessage(false);
+        }, 5000);
+    }
 };
 
-ko.applyBindings(new ViewModel());
+var koViewModel = new ViewModel()
+ko.applyBindings(koViewModel);
 
+/* TODO REMOVE
 function displayMessage(p_message, p_messageType) {
+    koViewModel.displayLogMessage(p_message);
+    
     // Display the message
     var messageDisplay = $('#message_display');
     messageDisplay.show();
@@ -150,8 +172,9 @@ function displayMessage(p_message, p_messageType) {
         messageDisplay.removeClass('negative_message');
         messageDisplay.removeClass('positive_message');
         messageDisplay.removeClass('neutral_message');
-    }, 10000);
+    }, 5000);
 }
+*/
 
 // Code to get yelp reviews is mainly taken from: https://github.com/levbrie/mighty_marks/blob/master/yelp-business-sample.html
 // Although it was adapted to be object-oriented and reusable
@@ -195,7 +218,8 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
     
     p_marker.yelpTimeout = setTimeout(function() {
-        displayMessage('Yelp ajax timeout for: ' + p_marker.title, 'negative');
+        // TODO REMOVE displayMessage('Yelp ajax timeout for: ' + p_marker.title, 'negative');
+        koViewModel.displayLogMessage('Yelp ajax timeout for: ' + p_marker.title);
     }, 4000);
     
     // Make the Ajax Call
@@ -219,9 +243,14 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
         'error' : function(p_XMLHttpRequest, p_textStatus, p_errorThrown) {
             clearTimeout(p_marker.yelpTimeout);
             
+            /* TODO REMOVE
             displayMessage('Could not get yelp info for: ' + p_marker.title + 
                 ', textStatus: ' + p_textStatus +
                 ', errorThrown: ' + p_errorThrown, 'negative');
+                */
+            koViewModel.displayLogMessage('Could not get yelp info for: ' + p_marker.title + 
+                ', textStatus: ' + p_textStatus +
+                ', errorThrown: ' + p_errorThrown);
         }
 	});
 };
