@@ -13,7 +13,8 @@ var g_markersArray = [
         infoContent: '',
         mapMarker: null,
         geoLocation: null,
-        infoWindow: null
+        infoWindow: null,
+        yelpTimeout: null
     }, 
     {
         index: 1, 
@@ -26,7 +27,8 @@ var g_markersArray = [
         infoContent: '',
         mapMarker: null,
         geoLocation: null,
-        infoWindow: null
+        infoWindow: null,
+        yelpTimeout: null
     }, 
     {
         index: 2, 
@@ -39,7 +41,8 @@ var g_markersArray = [
         infoContent: '',
         mapMarker: null,
         geoLocation: null,
-        infoWindow: null
+        infoWindow: null,
+        yelpTimeout: null
     }, 
     {
         index: 3, 
@@ -52,7 +55,8 @@ var g_markersArray = [
         infoContent: '',
         mapMarker: null,
         geoLocation: null,
-        infoWindow: null
+        infoWindow: null,
+        yelpTimeout: null
     }, 
     {
         index: 4, 
@@ -65,7 +69,8 @@ var g_markersArray = [
         infoContent: '',
         mapMarker: null,
         geoLocation: null,
-        infoWindow: null
+        infoWindow: null,
+        yelpTimeout: null
     }     
 ];
 
@@ -189,6 +194,10 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
     var parameterMap = OAuth.getParameterMap(message.parameters);
 	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
     
+    p_marker.yelpTimeout = setTimeout(function() {
+        displayMessage('Yelp ajax timeout for: ' + p_marker.title, 'negative');
+    }, 4000);
+    
     // Make the Ajax Call
 	$.ajax({
 	    'url' : message.action,
@@ -197,6 +206,8 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 		'dataType' : 'jsonp',
         'timeout' : 3000,
 		'success' : function(p_data, p_textStats, p_XMLHttpRequest) {
+            clearTimeout(p_marker.yelpTimeout);
+            
             p_marker.yelpInfo = p_data;
             
             // Add the Yelp review to the info window
@@ -206,6 +217,8 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
             p_marker.infoWindow.setContent(p_marker.infoContent);
 		},
         'error' : function(p_XMLHttpRequest, p_textStatus, p_errorThrown) {
+            clearTimeout(p_marker.yelpTimeout);
+            
             displayMessage('Could not get yelp info for: ' + p_marker.title + 
                 ', textStatus: ' + p_textStatus +
                 ', errorThrown: ' + p_errorThrown, 'negative');

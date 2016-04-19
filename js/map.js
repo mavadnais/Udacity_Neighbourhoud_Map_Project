@@ -4,6 +4,7 @@
 var g_map;
 var g_geocoder;
 var g_mapInitialized = false;
+var g_displayedMapInitError = false;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -22,9 +23,14 @@ function initMap() {
     g_mapInitialized = true;
 }
 
+function initMapError() {
+    g_displayedMapInitError = true;
+    displayMessage('Could not initialize Google Map.', 'negative');  
+}
+
 // In 3 seconds check if map has been initialized
 window.setTimeout(function() {
-    if (! g_mapInitialized) {
+    if (! g_mapInitialized && ! g_displayedMapInitError) {
         displayMessage('Could not initialize Google Map.', 'negative');
     }
 }, 3000);
