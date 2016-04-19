@@ -9,12 +9,12 @@
 </head>
 <body class="dark_background">   
     <div id="top_bar" class="light_text flex_container">
-        <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" onclick="toggleMenuContainer();"/>
+        <img id="hamburger_icon" class="column pointer_cursor" src="images/menu-icon.png" data-bind="click: toggleMenuVisible"/>
         <div id="main_title" class="column"><span class="bright_color">MAV's</span> Neighbourhood <span class="bright_color">Map</span></div>  
     </div>
     <div data-bind="visible: logMessage.showMessage, html: logMessage.message" class="negative_message"></div>
     <div class="flex_container">
-        <div id="menu_container" class="flex_item">
+        <div id="menu_container" class="flex_item" data-bind="visible: menuIsVisible">
             <div id="main_menu" class="light_text column">
                 <div id="menu_title" class="bright_color">Markers:</div> 
                 <div id="filter_container" class="flex_container">

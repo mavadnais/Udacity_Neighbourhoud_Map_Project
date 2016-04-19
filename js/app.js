@@ -83,7 +83,7 @@ var g_infoImageHTMLBase = '<div class="info_image"><img src="http://maps.googlea
 var g_infoYelpHTMLBase = '<div class="info_yelp">%info_yelp%</div>';
 
 var g_testFailures = {
-    testGeocodeFailure: true  
+    testGeocodeFailure: false  
 };
 
 var g_selectedMarkers = [];
@@ -117,7 +117,8 @@ var ViewModel = function() {
         openInfoWindowByIndex(p_selectedMarker.index());
         animateMarkerByIndex(p_selectedMarker.index());
         if (g_isMobile) {
-            hideMenuContainer();
+            // TODO REMOVE hideMenuContainer();
+            self.hideMenu();
         }
     };   
     
@@ -131,7 +132,22 @@ var ViewModel = function() {
             self.logMessage.message('');
             self.logMessage.showMessage(false);
         }, 5000);
-    }
+    };
+    
+    this.menuIsVisible = ko.observable(true);
+    
+    this.toggleMenuVisible = function() {
+        self.menuIsVisible(! self.menuIsVisible());
+    };
+    
+    this.hideMenu = function() {
+        self.menuIsVisible(false);
+    };
+    
+    this.showMenu = function() {
+        self.menuIsVisible(true);
+    };
+    
 };
 
 var koViewModel = new ViewModel()
@@ -277,12 +293,14 @@ $(function(){
         mapWidth = windowWidth;
         mapHeight = windowHeight * 0.87;
         
-        hideMenuContainer();
+        //TODO REMOVE hideMenuContainer();
+        koViewModel.hideMenu();
     }
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
 });
 
+/* TODO REMOVE:
 function toggleMenuContainer() {
     $('#menu_container').toggle();
 }
@@ -294,6 +312,7 @@ function hideMenuContainer() {
 function showMenuContainer() {
     $('#menu_container').show();
 }
+*/
 
 function updateFilter() {
     var filterValue = $('#filter_text_field').val();
