@@ -87,7 +87,6 @@ var g_testFailures = {
 };
 
 var g_selectedMarkers = [];
-// TODO REMOVE var g_displayMessage = '';
 var g_isMobile;
 
 // Class for knockout markers
@@ -117,7 +116,6 @@ var ViewModel = function() {
         openInfoWindowByIndex(p_selectedMarker.index());
         animateMarkerByIndex(p_selectedMarker.index());
         if (g_isMobile) {
-            // TODO REMOVE hideMenuContainer();
             self.hideMenu();
         }
     };   
@@ -152,45 +150,6 @@ var ViewModel = function() {
 
 var koViewModel = new ViewModel()
 ko.applyBindings(koViewModel);
-
-/* TODO REMOVE
-function displayMessage(p_message, p_messageType) {
-    koViewModel.displayLogMessage(p_message);
-    
-    // Display the message
-    var messageDisplay = $('#message_display');
-    messageDisplay.show();
-    if (g_displayMessage) {
-        g_displayMessage += '<br>' + p_message;
-    }
-    else {
-        g_displayMessage = p_message;
-    }
-    messageDisplay.html(g_displayMessage);
-    
-    // Change text color depending on type of message
-    switch (p_messageType) {
-        case 'negative':
-            messageDisplay.addClass('negative_message');
-            break;
-        case 'positive':
-            messageDisplay.addClass('positive_message');
-            break;
-        default:
-            messageDisplay.addClass('neutral_message');
-    }
-    
-    // In 10 seconds hide the message
-    window.setTimeout(function() {
-        messageDisplay.hide();
-        g_displayMessage = '';
-        messageDisplay.html(g_displayMessage);
-        messageDisplay.removeClass('negative_message');
-        messageDisplay.removeClass('positive_message');
-        messageDisplay.removeClass('neutral_message');
-    }, 5000);
-}
-*/
 
 // Code to get yelp reviews is mainly taken from: https://github.com/levbrie/mighty_marks/blob/master/yelp-business-sample.html
 // Although it was adapted to be object-oriented and reusable
@@ -234,7 +193,6 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
 	parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
     
     p_marker.yelpTimeout = setTimeout(function() {
-        // TODO REMOVE displayMessage('Yelp ajax timeout for: ' + p_marker.title, 'negative');
         koViewModel.displayLogMessage('Yelp ajax timeout for: ' + p_marker.title);
     }, 4000);
     
@@ -259,11 +217,6 @@ YelpRetriever.prototype.getYelpInfo = function(p_marker) {
         'error' : function(p_XMLHttpRequest, p_textStatus, p_errorThrown) {
             clearTimeout(p_marker.yelpTimeout);
             
-            /* TODO REMOVE
-            displayMessage('Could not get yelp info for: ' + p_marker.title + 
-                ', textStatus: ' + p_textStatus +
-                ', errorThrown: ' + p_errorThrown, 'negative');
-                */
             koViewModel.displayLogMessage('Could not get yelp info for: ' + p_marker.title + 
                 ', textStatus: ' + p_textStatus +
                 ', errorThrown: ' + p_errorThrown);
@@ -293,26 +246,11 @@ $(function(){
         mapWidth = windowWidth;
         mapHeight = windowHeight * 0.87;
         
-        //TODO REMOVE hideMenuContainer();
         koViewModel.hideMenu();
     }
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
 });
-
-/* TODO REMOVE:
-function toggleMenuContainer() {
-    $('#menu_container').toggle();
-}
-
-function hideMenuContainer() {
-    $('#menu_container').hide();
-}
-
-function showMenuContainer() {
-    $('#menu_container').show();
-}
-*/
 
 function updateFilter() {
     var filterValue = $('#filter_text_field').val();
@@ -352,7 +290,6 @@ function clearFilter() {
     
     // Close all info windows
     closeAllInfoWindows();   
-    // TODO REMOVE: deselectAllMarkers();
     
     // Clear the selected marker array
     g_selectedMarkers = [];
