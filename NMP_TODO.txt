@@ -1,16 +1,15 @@
 =================================================================
 TODO:
 -----------------------------------------------------------------
-- Use Knockout to handle list, filter, and any other information on the page that is subject to changing state.
---- See code review example app.js
-
-- Fix all TODOs or remove them
 
 
 
 ===============================================================
 DONE:
 ---------------------------------------------------------------
+- Use Knockout to handle list, filter, and any other information on the page that is subject to changing state.
+--- See code review example app.js
+- Fix all TODOs or remove them
 - Google maps implement error handling (see code review index.html).
 - Use timeout to handle yelp jsonp errors on the yelp side. (see code review app.js).
 - NOT DONE: CSS: change ids to classes, maybe, probably not
