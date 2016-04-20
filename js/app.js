@@ -93,6 +93,7 @@ var g_isMobile;
 var Marker = function(p_data) {
     this.index = ko.observable(p_data.index);
     this.title = ko.observable(p_data.title);
+    this.isSelected = ko.observable(false);
     this.data = p_data;      
 };
 
@@ -106,23 +107,78 @@ var LogMessage = function() {
 var ViewModel = function() {
     var self = this;
     
-    this.markerList = ko.observableArray([]);
+    // Knockout code to handle displaying and selecting markers
+    self.markerList = ko.observableArray([]);
     
     g_markersArray.forEach(function(p_markerItem) {
         self.markerList.push(new Marker(p_markerItem));
     });
     
-    this.selectCurrentMarker = function(p_selectedMarker) {
+    self.selectCurrentMarker = function(p_selectedMarker) {
         openInfoWindowByIndex(p_selectedMarker.index());
         animateMarkerByIndex(p_selectedMarker.index());
         if (g_isMobile) {
             self.hideMenu();
         }
-    };   
+    };  
     
-    this.logMessage = new LogMessage(); 
+    // Knockout code to handle filtering markers
+    self.filterValue = ko.observable('');
     
-    this.displayLogMessage = function(p_message) {
+    self.updateFilter = function() {
+        g_selectedMarkers = [];
+        
+        // Iterate through all the markers and see if the filter is a substring of the title
+        for (var i = 0; i < g_markersArray.length; i++) {
+            var lowerCaseTitle = g_markersArray[i].title.toLowerCase();
+            var lowerCaseFilterValue = self.filterValue().toLowerCase();
+                
+            if (lowerCaseFilterValue && lowerCaseTitle.indexOf(lowerCaseFilterValue) > -1) {
+                g_selectedMarkers.push(g_markersArray[i]);
+                self.markerList()[i].isSelected(true);
+                g_markersArray[i].mapMarker.setVisible(true);    
+            }
+            else {
+                self.markerList()[i].isSelected(false);
+                g_markersArray[i].mapMarker.setVisible(false);  
+            }    
+        }
+        
+        // If there is only one selected marker, open its info window    
+        if (g_selectedMarkers.length == 1) {
+            openInfoWindowByMarker(g_selectedMarkers[0]);
+            animateMarkerByMarker(g_selectedMarkers[0]);
+        }
+        
+        // If there is nothing in the filter, make sure they are all visible   
+        if (! self.filterValue()) {
+            setAllMapMarkersVisible(true);
+        }    
+    }; 
+    
+    self.clearFilter = function() { 
+        // Clear the filter value
+        self.filterValue('');
+          
+        // Close all info windows
+        closeAllInfoWindows();   
+        
+        // Clear the selected marker array
+        g_selectedMarkers = [];
+        
+        // Remove selected_marker class from all markers since none are selected
+        for (var i = 0; i < self.markerList().length; i++) {
+            self.markerList()[i].isSelected(false);   
+        }
+        
+        // Set all map markers visible
+        setAllMapMarkersVisible(true);
+    };
+    
+    // Knockout code to handle displaying log messages
+    self.logMessage = new LogMessage(); 
+    
+    self.displayLogMessage = function(p_message) {
         self.logMessage.showMessage(true);
         self.logMessage.message(self.logMessage.message() + '<br>' + p_message);
         
@@ -132,17 +188,18 @@ var ViewModel = function() {
         }, 5000);
     };
     
-    this.menuIsVisible = ko.observable(true);
+    // Knockout code to handle the menu visibility
+    self.menuIsVisible = ko.observable(true);
     
-    this.toggleMenuVisible = function() {
+    self.toggleMenuVisible = function() {
         self.menuIsVisible(! self.menuIsVisible());
     };
     
-    this.hideMenu = function() {
+    self.hideMenu = function() {
         self.menuIsVisible(false);
     };
     
-    this.showMenu = function() {
+    self.showMenu = function() {
         self.menuIsVisible(true);
     };
     
@@ -251,57 +308,6 @@ $(function(){
     $('#map').width(mapWidth + 'px');
     $('#map').height(mapHeight + 'px');
 });
-
-function updateFilter() {
-    var filterValue = $('#filter_text_field').val();
-    
-    g_selectedMarkers = [];
-    
-    // Iterate through all the markers and see if the filter is a substring of the title{
-    for (var i = 0; i < g_markersArray.length; i++) {
-        var lowerCaseTitle = g_markersArray[i].title.toLowerCase();
-        var lowerCaseFilterValue = filterValue.toLowerCase();
-            
-        if (lowerCaseFilterValue && lowerCaseTitle.indexOf(lowerCaseFilterValue) > -1) {
-            g_selectedMarkers.push(g_markersArray[i]);
-            $('#marker_menu_item_' + i).addClass('selected_marker');
-            g_markersArray[i].mapMarker.setVisible(true);    
-        }
-        else {
-            $('#marker_menu_item_' + i).removeClass('selected_marker');
-            g_markersArray[i].mapMarker.setVisible(false);  
-        }    
-    }
-    
-    // If there is only one selected marker, open its info window    
-    if (g_selectedMarkers.length == 1) {
-        openInfoWindowByMarker(g_selectedMarkers[0]);
-        animateMarkerByMarker(g_selectedMarkers[0]);
-    }
-    
-    // If there is nothing in the filter, make sure they are all visible   
-    if (! filterValue) {
-        setAllMapMarkersVisible(true);
-    }
-}
-
-function clearFilter() {
-    $('#filter_text_field').val('');
-    
-    // Close all info windows
-    closeAllInfoWindows();   
-    
-    // Clear the selected marker array
-    g_selectedMarkers = [];
-    
-    // Remove selected_marker class from all markers since none are selected
-    for (var i = 0; i < g_markersArray.length; i++) {
-        $('#marker_menu_item_' + i).removeClass('selected_marker');   
-    }
-    
-    // Set all map markers visible
-    setAllMapMarkersVisible(true);
-}
 
 function generateInfoContent(p_marker) {
     // Generate info window content html
